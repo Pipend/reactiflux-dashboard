@@ -26,10 +26,30 @@ module.exports = create-class do
     Storyboard do 
       url: config.pipe.url
       cache: config.pipe.cache
+      state: @props.location.query
+
+      # on-change :: StoryboardState -> ()
+      on-change: (new-state) ~> 
+        browser-history.replace do 
+          pathname: @props.location.pathname
+          query: new-state
+          state: new-state
+
+      # on-execute :: Parameters -> ()
+      on-execute: (parameters, will-execute) !~>
+        @props.record do 
+          event-type: \execute
+          event-args: {parameters, will-execute}
+
+      # on-reset :: () -> ()
+      on-reset: !~>
+        @props.record do
+          event-type: \reset
+
       controls: 
         * name: \Range
           default-value: 
-            ago: '1 month'
+            ago: '1 year'
             from-date: default-from-date
             to-date: default-to-date
           ui-value-from-state: ({ago, from, to}) -> {ago, from, to}
@@ -44,6 +64,7 @@ module.exports = create-class do
         * name: \searchString
           label: \search
           type: \text
+          placeholder: "Regex works too"
           default-value: ""
 
         * name: \username
@@ -63,15 +84,6 @@ module.exports = create-class do
           type: \number
           default-value: 100
         ...
-      state: @props.location.query
-
-      # on-change :: StoryboardState -> ()
-      on-change: (new-state) ~> 
-        browser-history.replace do 
-          pathname: @props.location.pathname
-          query: new-state
-          state: new-state
-
       Story branch-id: \pBoHVpe
 
   get-initial-state: ->
