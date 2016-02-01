@@ -1,0 +1,11 @@
+*.css
+*.js
+*.log
+*.rdb
+*.sublime-workspace
+*.xml
+.DS_Store
+rough
+coverage/
+node_modules/
+config.ls

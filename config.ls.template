@@ -1,0 +1,10 @@
+module.exports =
+    pipe:
+        url: \http://rf.pipend.com
+        cache: 3600
+
+    gulp:
+        reload-port: 8601
+        minify: false
+
+    http-port: 8600

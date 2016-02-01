@@ -1,0 +1,50 @@
+{
+  "name": "reactiflux-dashboard",
+  "version": "0.0.1",
+  "description": "reactiflux-dashboard",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha test/index.ls --compilers ls:livescript",
+    "coverage": "gulp coverage",
+    "coveralls": "gulp coverage  && cat coverage/lcov.info | coveralls",
+    "configure": "cp config.ls.template config.ls"
+  },
+  "author": "Furqan Zafar",
+  "devDependencies": {
+    "coveralls": "^2.11.4",
+    "gulp": "^3.9.0",
+    "gulp-connect": "^2.3.1",
+    "gulp-if": "^2.0.0",
+    "gulp-livescript": "^3.0.0",
+    "gulp-livescript-istanbul": "0.0.1",
+    "gulp-mocha": "^2.2.0",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-streamify": "^1.0.2",
+    "gulp-stylus": "^2.2.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "liveify": "^2.0.0",
+    "livescript": "^1.4.0",
+    "nib": "^1.1.0",
+    "run-sequence": "^1.1.5",
+    "underscore": "^1.8.3",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "gulp-nodemon": "^2.0.6",
+    "pipe-storyboard": "latest",
+    "prelude-extension": "latest",
+    "prelude-ls": "^1.1.1",
+    "react": "^0.14.7",
+    "react-addons-css-transition-group": "^0.14.7",
+    "react-addons-shallow-compare": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-router": "^2.0.0-rc5",
+    "socket.io": "^1.4.4",
+    "socket.io-client": "^1.4.4"
+  }
+}
