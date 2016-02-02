@@ -14,5 +14,4 @@ before script:
 script:
   - npm run configure
   - gulp build
-  - npm run coveralls
 
