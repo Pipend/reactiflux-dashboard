@@ -1,0 +1,9 @@
+*.*
+rough
+node_modules/
+public/
+!.gitignore
+!index.js
+!index.css
+!index.html
+!images/*
