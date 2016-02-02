@@ -1,14 +1,10 @@
 module.exports =
     pipe:
-        url: \http://rf.pipend.com
-        cache: 3600
+        url: 'http://rf.pipend.com'
 
     spy:
-        enabled: true
-        url: \http://localhost:3010/reactiflux-dashboard
+        enabled: false
+        url: ''
 
     gulp:
-        reload-port: 8601
         minify: false
-
-    http-port: 8600

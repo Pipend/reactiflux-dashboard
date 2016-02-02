@@ -1,99 +1,91 @@
-require! \../../config.ls
-{last} = require \prelude-ls
-{clone-element, create-class, create-factory, DOM:{div}}:React = require \react
+{map} = require \prelude-ls
+{clone-element, create-class, create-factory, DOM:{a, div}}:React = require \react
 {render} = require \react-dom
 require! \react-router
-Router = create-factory react-router.Router
-Route = create-factory react-router.Route
-IndexRoute = create-factory react-router.IndexRoute
 Link = create-factory react-router.Link
 
-require! \./SearchRoute.ls
-
-App = create-class do
+module.exports = create-class do
 
     display-name: \App
 
-    # render :: a -> ReactElement
-    render: ->
-        div null,
-
-            # ROUTES
-            div null,
-
-                # pass spy.record method as props to child component
-                clone-element @props.children, {} <<< config <<< 
-                    record: @state.record
-
-            div {class-name: \building}, \Building... if @state.building
-
-    # get-initial-state :: a -> UIState
-    get-initial-state: -> 
-        building: false
+    # get-default-props :: () -> Props
+    get-default-props: ->
         record: (->)
 
-    # component-did-mount :: a -> Void
-    component-will-mount: !->
-        if !!config?.gulp?.reload-port
-            (require \socket.io-client) "http://localhost:#{config.gulp.reload-port}"
-                ..on \build-start, ~> @set-state building: true
-                ..on \build-complete, -> window.location.reload!
+    # render :: a -> ReactElement
+    render: ->
+        menu-items = 
+            * path: <[/ /trend]>
+              title: 'Trend'
 
-        if !!config?.spy?.enabled
+            * path: <[/search]>
+              title: 'Search'
 
-            {get-load-time-object, record} = (require \spy-web-client) do 
-                url: config.spy.url
-                common-event-properties : ~> 
-                    pathname: @props.location.pathname
-                    
-            <~ @set-state {record}
+            * path: <[/activity]>
+              title: 'Activity'
 
-            # record page-ready event            
-            get-load-time-object (load-time-object) ~>
-                record do 
-                    event-type: \load
-                    event-args: load-time-object
+            * path: <[/cloud]>
+              title: 'Word Cloud'
 
-            # record clicks
-            @click-listener = ({target, type, page-x, page-y}:e?) ~>
+            * path: <[/fame]>
+              title: 'Hall of fame'
+            ...
 
-                # find-parent-id :: DOMElement -> String
-                find-parent-id = (element) ->
-                    return switch
-                        | element.parent-element == null => \unknown
-                        | typeof element.id == \string and element.id.length > 0 => element.id
-                        | _ => find-parent-id element.parent-element
+        div class-name: \app,
 
-                record do
-                    event-type: \click
-                    event-args:
-                        type: type 
-                        element:
-                            parent-id: find-parent-id target
-                            id: target.id
-                            class: target.class-name
-                            client-rect: target.get-bounding-client-rect!
-                            tag: target.tag-name
-                        x: page-x
-                        y: page-y
+            # MENU
+            div do 
+                class-name: \menu
 
-            document.add-event-listener \click, @click-listener
+                # LOGO
+                Link do
+                    class-name: \logo
+                    to: \/
+                    'Reactiflux on Discord'
 
-    # component-will-unmount :: a -> Void
-    component-will-unmount: !-> 
-        if !!@click-listener
-            document.remove-event-listener \click, @click-listener 
+                # NAV
+                div do 
+                    class-name: \nav
+                    menu-items |> map ({path, title}) ~>
 
-<- window.add-event-listener \load
-<- set-timeout _, 0
+                        # MENU ITEM
+                        Link do 
+                            key: title
+                            to: path.0
+                            class-name: switch
+                                | @props.location.pathname in path => \highlight
+                                | _ => undefined
+                            title
 
-render do 
-    Router do 
-        history: react-router.browser-history
-        Route do 
-            name: \app
-            path: \/
-            component: App
-            IndexRoute component: SearchRoute
-            Route name: \search, path: \/search, component: SearchRoute
-    document.get-element-by-id \mount-node
+                div do 
+                    class-name: \github-buttons
+
+                    # STAR
+                    a do 
+                        class-name: \github-button
+                        href: \https://github.com/Pipend/reactiflux-dashboard
+                        \data-icon : \octicon-star
+                        \data-style : \mega
+                        \data-count-href : \/Pipend/reactiflux-dashboard/stargazers
+                        \data-count-api : \/repos/Pipend/reactiflux-dashboard#stargazers_count
+                        \data-count-aria-label : '# stargazers on GitHub'
+                        \aria-label : "Star Pipend/reactiflux-dashboard on GitHub"
+                        \Star
+
+                    # FORK
+                    a do 
+                        class-name: \github-button
+                        href: \https://github.com/Pipend/reactiflux-dashboard/fork
+                        \data-icon : \octicon-repo-forked
+                        \data-style : \mega
+                        \data-count-href : \/Pipend/reactiflux-dashboard/network
+                        \data-count-api : \/repos/Pipend/reactiflux-dashboard#forks_count
+                        \data-count-aria-label : '# forks on GitHub'
+                        \aria-label : "Fork Pipend/reactiflux-dashboard on GitHub"
+                        \Fork
+
+            # ROUTES
+            div class-name: \routes,
+
+                # pass spy.record method as props to child component
+                clone-element @props.children, {} <<< record: @props.record

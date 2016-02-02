@@ -1,8 +1,65 @@
-@require 'SearchRoute'
+// components commonly used in all routes
+@require 'DateRange'
 
-body
-    margin 0px
-    padding 0px
+// storyboard
+@require '../../node_modules/pipe-storyboard/src/index.css'
 
-.react-selectize
-    font-size 12
+// routes
+@require 'Cloud'
+
+.app
+
+    .menu
+        background white
+        border-bottom 1px solid #ccc
+        color black
+        cursor pointer
+        display flex
+        font-family Helvetica
+        width 100%
+
+        a
+            text-decoration none
+            display flex
+            align-items center
+            height 50px
+
+        .logo
+            color #000
+            padding 0px 32px 0px 10px
+            flex-grow 0
+            font-size 24px
+
+            &:before
+                background-image url('images/logo.png')
+                background-position center center
+                background-repeat no-repeat
+                background-size 36px
+                content ""
+                width 50px
+                height 50px
+
+        .nav
+            display flex
+            flex-grow 0
+
+            a    
+                border-top 3px solid white
+                box-sizing border-box
+                color #555
+                padding 0px 20px
+
+                &.highlight
+                    border-color orange
+
+        .github-buttons
+            flex-grow 1
+            display flex
+            align-items center
+            justify-content flex-end
+            
+            > a, > iframe
+                padding 0px 20px 0px 0px
+
+    .routes
+        height calc(100% - 51px)
