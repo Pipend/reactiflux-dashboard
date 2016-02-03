@@ -1,6 +1,6 @@
 {map} = require \prelude-ls
 {clone-element, create-class, create-factory, DOM:{a, div}}:React = require \react
-{render} = require \react-dom
+{find-DOM-node, render} = require \react-dom
 require! \react-router
 Link = create-factory react-router.Link
 
@@ -15,20 +15,20 @@ module.exports = create-class do
     # render :: a -> ReactElement
     render: ->
         menu-items = 
-            * path: <[/ /trend]>
-              title: 'Trend'
-
-            * path: <[/search]>
+            * path: <[/ /search]>
               title: 'Search'
+            
+            * path: <[/fame]>
+              title: 'Hall of fame'
+              
+            * path: <[/trend]>
+              title: 'Trend'
 
             * path: <[/activity]>
               title: 'Activity'
 
             * path: <[/cloud]>
               title: 'Word Cloud'
-
-            * path: <[/fame]>
-              title: 'Hall of fame'
             ...
 
         div class-name: \app,
@@ -46,15 +46,20 @@ module.exports = create-class do
                 # NAV
                 div do 
                     class-name: \nav
+
+                    # ORANGE BAR
+                    div do 
+                        class-name: \bar, ref: \bar
+
                     menu-items |> map ({path, title}) ~>
+                        highlight = @props.location.pathname in path
 
                         # MENU ITEM
                         Link do 
                             key: title
                             to: path.0
-                            class-name: switch
-                                | @props.location.pathname in path => \highlight
-                                | _ => undefined
+                            class-name: if highlight then \highlight else undefined
+                            ref: if highlight then \highlight else undefined
                             title
 
                 div do 
@@ -63,25 +68,25 @@ module.exports = create-class do
                     # STAR
                     a do 
                         class-name: \github-button
-                        href: \https://github.com/Pipend/reactiflux-dashboard
+                        href: \https://github.com/Pipend/pipe
                         \data-icon : \octicon-star
                         \data-style : \mega
-                        \data-count-href : \/Pipend/reactiflux-dashboard/stargazers
-                        \data-count-api : \/repos/Pipend/reactiflux-dashboard#stargazers_count
+                        \data-count-href : \/Pipend/pipe/stargazers
+                        \data-count-api : \/repos/Pipend/pipe#stargazers_count
                         \data-count-aria-label : '# stargazers on GitHub'
-                        \aria-label : "Star Pipend/reactiflux-dashboard on GitHub"
+                        \aria-label : "Star Pipend/pipe on GitHub"
                         \Star
 
                     # FORK
                     a do 
                         class-name: \github-button
-                        href: \https://github.com/Pipend/reactiflux-dashboard/fork
+                        href: \https://github.com/Pipend/pipe/fork
                         \data-icon : \octicon-repo-forked
                         \data-style : \mega
-                        \data-count-href : \/Pipend/reactiflux-dashboard/network
-                        \data-count-api : \/repos/Pipend/reactiflux-dashboard#forks_count
+                        \data-count-href : \/Pipend/pipe/network
+                        \data-count-api : \/repos/Pipend/pipe#forks_count
                         \data-count-aria-label : '# forks on GitHub'
-                        \aria-label : "Fork Pipend/reactiflux-dashboard on GitHub"
+                        \aria-label : "Fork Pipend/pipe on GitHub"
                         \Fork
 
             # ROUTES
@@ -89,3 +94,18 @@ module.exports = create-class do
 
                 # pass spy.record method as props to child component
                 clone-element @props.children, {} <<< record: @props.record
+
+    # updated-bar-location :: () -> ()
+    update-bar-location: !->
+        bar = find-DOM-node @refs.bar 
+        highlight = find-DOM-node @refs.highlight
+        bar.style <<<
+            left: highlight.offset-left
+            width: highlight.offset-width
+
+    # component-did-mount :: () -> ()
+    component-did-mount: !-> @update-bar-location!
+
+    # component-did-update :: () -> ()
+    component-did-update: !-> @update-bar-location!
+        

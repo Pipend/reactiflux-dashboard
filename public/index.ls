@@ -73,7 +73,7 @@ render do
         Route do 
             path: \/
             component: AppWrapper
-            IndexRoute component: route-wrapper Trend
+            IndexRoute component: route-wrapper Search
             Route path: \/activity, component: route-wrapper Activity
             Route path: \/cloud, component: route-wrapper Cloud
             Route path: \/fame, component: route-wrapper Fame

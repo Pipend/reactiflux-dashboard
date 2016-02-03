@@ -3,6 +3,10 @@ require! \moment
 {create-factory} = require \react
 DateRange = create-factory require \./components/DateRange.ls
 
+# to-gmt :: String -> String
+to-gmt = (local-datetime) -> 
+    (moment local-datetime, 'YYYY-MM-DDTHH:mm' .utc-offset 0 .format 'YYYY-MM-DDTHH:mm:ss') + \Z
+
 # :: Map String, Control, where Control is used in Storyboard components
 module.exports = 
 
@@ -34,7 +38,13 @@ module.exports =
             if ago == \custom then ui-value else {ago}
             
         parameters-from-ui-value: ({ago, from, to}) ->
-            if ago == \custom then {ago: "", from, to} else {from: null, to: null, ago}
+            if ago == \custom 
+                ago: ""
+                from: to-gmt from
+                to: to-gmt to
+
+            else 
+                {from: null, to: null, ago}
 
         render: (value, on-change) ~>
             DateRange {} <<< value <<< 

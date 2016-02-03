@@ -42,15 +42,22 @@
         .nav
             display flex
             flex-grow 0
+            position relative
 
             a    
-                border-top 3px solid white
                 box-sizing border-box
-                color #555
+                color #666
                 padding 0px 20px
+                transition all 0.4s 0s ease
 
                 &.highlight
-                    border-color orange
+                    color #222
+
+            .bar
+                background-color orange
+                transition all 0.3s 0s ease
+                position absolute
+                height 3px
 
         .github-buttons
             flex-grow 1
