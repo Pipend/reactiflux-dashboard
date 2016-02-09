@@ -4,7 +4,7 @@ require! \moment
 {{div}:DOM, create-class, create-factory} = require \react
 require! \pipe-storyboard
 Layout = create-factory pipe-storyboard.Layout
-Story = create-factory pipe-storyboard.Story
+StoryWrapper = create-factory require \./StoryWrapper.ls
 StoryboardWrapper = create-factory require \./StoryboardWrapper.ls
 
 module.exports = create-class do 
@@ -32,7 +32,7 @@ module.exports = create-class do
             border-bottom: '1px solid #ccc'
 
           # TOP CONTRIBUTORS (# of messages)
-          Story do 
+          StoryWrapper do 
             style:
               border-right: '1px solid #ccc'
               flex: 1
@@ -40,7 +40,7 @@ module.exports = create-class do
             branch-id: \prKNvF7
 
           # MOST ACTIVE CHANNELS
-          Story do 
+          StoryWrapper do 
             style:
               border-right: '1px solid #ccc'
               flex: 1
@@ -53,7 +53,7 @@ module.exports = create-class do
             border-bottom: '1px solid #ccc'
 
           # MOST MENTIONED USER
-          Story do 
+          StoryWrapper do 
             style:
               border-right: '1px solid #ccc'
               flex: 1
@@ -61,7 +61,7 @@ module.exports = create-class do
             branch-id: \prKPBde
 
           # TOP MENTIONERS
-          Story do 
+          StoryWrapper do 
             style:
               flex: 1
               height: 600
@@ -73,7 +73,7 @@ module.exports = create-class do
             border-bottom: '1px solid #ccc'
 
           # MOST THANKED USERS
-          Story do 
+          StoryWrapper do 
             style:
               border-right: '1px solid #ccc'
               flex: 1
@@ -81,14 +81,14 @@ module.exports = create-class do
             branch-id: \prVXRlo
 
           # MOST THANKFUL USERS
-          Story do 
+          StoryWrapper do 
             style:
               flex: 1
               height: 600
             branch-id: \prVYb0r
             
         # EMOJIS
-        Story do 
+        StoryWrapper do 
           style:
             height: 600
           branch-id: \prY4ZLz

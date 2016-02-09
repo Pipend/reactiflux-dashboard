@@ -3,12 +3,12 @@
 {{div}:DOM, create-class, create-factory} = require \react
 {render} = require \react-dom
 require! \pipe-storyboard
-Story = create-factory pipe-storyboard.Story
+StoryWrapper = create-factory require \./StoryWrapper.ls
 StoryboardWrapper = create-factory require \./StoryboardWrapper.ls
 
 module.exports = create-class do 
 
-  display-name: \Activity
+  display-name: \Treemap
 
   # render :: a -> ReactElement
   render: ->
@@ -23,7 +23,7 @@ module.exports = create-class do
       record: @props.record
 
       # TREE MAP
-      Story do 
+      StoryWrapper do 
         style:
           border-right: '1px solid #ccc'
           flex: 1

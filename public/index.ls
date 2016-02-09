@@ -6,10 +6,12 @@ IndexRoute = create-factory react-router.IndexRoute
 Route = create-factory react-router.Route
 Router = create-factory react-router.Router
 App = create-factory require \./components/App.ls
-require! \./components/Activity.ls
 require! \./components/Cloud.ls
 require! \./components/Fame.ls
+require! \./components/DeadChannels.ls
+require! \./components/PunchCard.ls
 require! \./components/Search.ls
+require! \./components/Treemap.ls
 require! \./components/Trend.ls
 
 # record :: Event -> ()
@@ -74,9 +76,11 @@ render do
             path: \/
             component: AppWrapper
             IndexRoute component: route-wrapper Search
-            Route path: \/activity, component: route-wrapper Activity
             Route path: \/cloud, component: route-wrapper Cloud
             Route path: \/fame, component: route-wrapper Fame
+            Route path: \/dead, component: route-wrapper DeadChannels
+            Route path: \/punch, component: route-wrapper PunchCard
             Route path: \/search, component: route-wrapper Search
+            Route path: \/treemap, component: route-wrapper Treemap
             Route path: \/trend, component: route-wrapper Trend
     document.get-element-by-id \mount-node

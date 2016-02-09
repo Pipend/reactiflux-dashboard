@@ -1,10 +1,10 @@
 {get-channels} = require \../api.ls
 {channel-selector, date-range, username-selector} = require \../storyboard-controls.ls
 {map} = require \prelude-ls
-{{div}:DOM, create-class, create-factory} = require \react
+{{a, div}:DOM, create-class, create-factory} = require \react
 require! \pipe-storyboard
 Layout = create-factory pipe-storyboard.Layout
-Story = create-factory pipe-storyboard.Story
+StoryWrapper = create-factory require \./StoryWrapper.ls
 StoryboardWrapper = create-factory require \./StoryboardWrapper.ls
 
 module.exports = create-class do 
@@ -36,9 +36,11 @@ module.exports = create-class do
       location: @props.location
       record: @props.record
       
-      Story do 
+      StoryWrapper do 
         branch-id: \pBoHVpe
         show-title: false
+        ref: \story
+
 
   get-initial-state: ->
     channels: []

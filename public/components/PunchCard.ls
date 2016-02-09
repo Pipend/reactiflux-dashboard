@@ -3,23 +3,20 @@
 {map} = require \prelude-ls
 {{div}:DOM, create-class, create-factory} = require \react
 require! \pipe-storyboard
+Layout = create-factory pipe-storyboard.Layout
 StoryWrapper = create-factory require \./StoryWrapper.ls
 StoryboardWrapper = create-factory require \./StoryboardWrapper.ls
 
 module.exports = create-class do 
 
-  display-name: \Cloud
+  display-name: \PunchCard
 
   # render :: a -> ReactElement
   render: ->
     StoryboardWrapper do 
-      class-name: \cloud
+      class-name: \punch-card
       cache: false
       controls: 
-        * date-range do 
-            default-value: '1 hour'
-            ranges: ['5 minutes', '30 minutes', '1 hour', '3 hours', '6 hours', '1 day', '1 week']
-
         * channel-selector do 
             channels: @state.channels
             multi: false
@@ -29,10 +26,36 @@ module.exports = create-class do
       location: @props.location
       record: @props.record
 
-      # TEXT CLOUD
-      StoryWrapper do 
-        branch-id: \prKOyno
-        show-title: false
+      Layout do 
+        style:
+          dispaly: \flex
+          flex-direction: \column
+
+
+        # PUNCHCARD 
+        StoryWrapper do 
+          branch-id: \prPxyVK
+          style:
+            border-bottom: '1px solid #ccc'
+            height: \50%
+
+        Layout do 
+          style:
+            dispaly: \flex
+            height: \50%
+
+          # RADAR
+          StoryWrapper do 
+            branch-id: \ps7FmFo
+            style:
+              border-right: '1px solid #ccc'
+              width: \50%
+
+          # BAR CHART
+          StoryWrapper do 
+            branch-id: \prOEk7L
+            style:
+              width: \50%
 
   get-initial-state: ->
     channels: []

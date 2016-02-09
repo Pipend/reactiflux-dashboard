@@ -22,6 +22,7 @@
             text-decoration none
             display flex
             align-items center
+            flex-shrink 0
             height 50px
 
         .logo
@@ -41,12 +42,15 @@
 
         .nav
             display flex
-            flex-grow 0
+            flex-grow 1
             position relative
+            z-index 1
 
-            a    
+            a
+                background-color white
                 box-sizing border-box
                 color #666
+                font-size 14px
                 padding 0px 20px
                 transition all 0.4s 0s ease
 
@@ -60,13 +64,15 @@
                 height 3px
 
         .github-buttons
-            flex-grow 1
+            background-color white
+            flex-grow 0
+            padding-left 10px
             display flex
             align-items center
             justify-content flex-end
-            
+
             > a, > iframe
-                padding 0px 20px 0px 0px
+                padding 0px 10px 0px 0px
 
     .routes
         height calc(100% - 51px)

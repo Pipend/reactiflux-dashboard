@@ -24,11 +24,17 @@ module.exports = create-class do
             * path: <[/trend]>
               title: 'Trend'
 
-            * path: <[/activity]>
-              title: 'Activity'
+            * path: <[/punch]>
+              title: 'Punch card'
+
+            * path: <[/treemap]>
+              title: 'Tree map'
 
             * path: <[/cloud]>
-              title: 'Word Cloud'
+              title: 'Word cloud'
+
+            * path: <[/dead]>
+              title: 'Dead channels'
             ...
 
         div class-name: \app,

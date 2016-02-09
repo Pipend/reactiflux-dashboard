@@ -4,7 +4,7 @@ require! \moment
 {{div}:DOM, create-class, create-factory} = require \react
 require! \pipe-storyboard
 Layout = create-factory pipe-storyboard.Layout
-Story = create-factory pipe-storyboard.Story
+StoryWrapper = create-factory require \./StoryWrapper.ls
 StoryboardWrapper = create-factory require \./StoryboardWrapper.ls
 
 module.exports = create-class do 
@@ -14,7 +14,7 @@ module.exports = create-class do
   # render :: a -> ReactElement
   render: ->
     StoryboardWrapper do
-      cache: 2 * 60 * 60
+      cache: 1 * 60 * 60
       controls: 
         * date-range default-value: '1 year'
 
@@ -22,7 +22,7 @@ module.exports = create-class do
           label: 'Bucket size'
           type: \select
           options: ['1 day', '3 days', '1 week', '1 month']
-          default-value: '1 day'
+          default-value: '1 week'
           parameters-from-ui-value: (value) ->
             [count, unit] = value.split ' '
             bucket-size: moment.duration (parse-int count), unit .as-milliseconds!
@@ -30,7 +30,7 @@ module.exports = create-class do
         * name: \sampleSize
           label: 'Sample size'
           type: \number
-          default-value: 20
+          default-value: 5
           client-side: true
         ...
       location: @props.location
@@ -46,7 +46,7 @@ module.exports = create-class do
           display: \flex
 
           # TREND
-          Story do 
+          StoryWrapper do 
             style:
               border-right: '1px solid #ccc'
               flex: 1
@@ -54,7 +54,7 @@ module.exports = create-class do
             branch-id: \prKNieS
 
           # GROWTH
-          Story do 
+          StoryWrapper do 
             style:
               flex: 1
               height: 300
@@ -65,7 +65,7 @@ module.exports = create-class do
           display: \flex
 
           # TREND
-          Story do 
+          StoryWrapper do 
             style:
               border-right: '1px solid #ccc'
               flex: 1
@@ -73,14 +73,14 @@ module.exports = create-class do
             branch-id: \prMlql1
 
           # GROWTH
-          Story do 
+          StoryWrapper do 
             style:
               flex: 1
               height: 300
             branch-id: \prKzXdM
 
         # USERS ONLINE - TREND
-        Story do 
+        StoryWrapper do 
           style:
             border-top: '1px solid #ccc'
             height: 500
@@ -96,7 +96,7 @@ module.exports = create-class do
             show-legend: true
 
           # CHANNELS 
-          Story do 
+          StoryWrapper do 
             style:
               border-right: '1px solid #ccc'
               height: 500
@@ -106,7 +106,7 @@ module.exports = create-class do
             branch-id: \prKRkKP
 
           # USERS
-          Story do 
+          StoryWrapper do 
             style:
               height: 500
             title: "Top contributers (in terms of # of messages) - Trend"
