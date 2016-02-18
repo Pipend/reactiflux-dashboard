@@ -10,8 +10,8 @@ addons:
     packages:
       - g++-4.8
 before script:
-  - npm install -g gulp
+  - npm install -g webpack
 script:
   - npm run configure
-  - gulp build
+  - webpack
 

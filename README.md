@@ -15,5 +15,5 @@ All the queries used in this project are hosted here: [http://rf.pipend.com/](ht
 # Setup 
 * `npm install`
 * `npm run configure`
-* `gulp`
+* `webpack-dev-server --inline`
 * `visit http://localhost:8080`
