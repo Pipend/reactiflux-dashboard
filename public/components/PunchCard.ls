@@ -30,7 +30,7 @@ module.exports = create-class do
         style:
           dispaly: \flex
           flex-direction: \column
-
+          height: \100%
 
         # PUNCHCARD 
         StoryWrapper do 
@@ -41,8 +41,9 @@ module.exports = create-class do
 
         Layout do 
           style:
-            dispaly: \flex
+            display: \flex
             height: \50%
+            width: \100%
 
           # RADAR
           StoryWrapper do 

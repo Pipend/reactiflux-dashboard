@@ -1,13 +1,19 @@
-// components commonly used in all routes
-@require 'DateRange'
-
-// storyboard
-@require '../../node_modules/pipe-storyboard/src/index.css'
-
-// routes
-@require 'Cloud'
-
 .app
+
+    .react-selectize
+        font-size 12
+
+    .storyboard
+        height 100%
+
+        .story
+            height 100%
+
+        .form
+            box-shadow none
+            
+            input[type=datetime-local]
+                font-size 10px
 
     .menu
         background white
@@ -18,7 +24,7 @@
         font-family Helvetica
         width 100%
 
-        a
+        .logo, .nav a
             text-decoration none
             display flex
             align-items center
@@ -32,7 +38,7 @@
             font-size 24px
 
             &:before
-                background-image url('images/logo.png')
+                background-image url('../images/logo.png')
                 background-position center center
                 background-repeat no-repeat
                 background-size 36px
@@ -71,8 +77,9 @@
             align-items center
             justify-content flex-end
 
-            > a, > iframe
+            .github-btn
                 padding 0px 10px 0px 0px
 
     .routes
-        height calc(100% - 51px)
+        position relative
+        height calc(100vh - 51px)

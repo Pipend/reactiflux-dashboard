@@ -5,6 +5,7 @@
 require! \pipe-storyboard
 StoryWrapper = create-factory require \./StoryWrapper.ls
 StoryboardWrapper = create-factory require \./StoryboardWrapper.ls
+require \./Cloud.styl
 
 module.exports = create-class do 
 

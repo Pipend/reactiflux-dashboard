@@ -4,6 +4,7 @@ require! \react-router
 {hash-history} = react-router
 require! \pipe-storyboard
 Storyboard = create-factory pipe-storyboard.Storyboard
+require \pipe-storyboard/src/index.css
 
 module.exports = create-class do 
 

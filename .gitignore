@@ -5,7 +5,8 @@
 *.sublime-workspace
 *.xml
 .DS_Store
+config.ls
 rough
 coverage/
 node_modules/
-config.ls
+public/build/

@@ -13,6 +13,7 @@ require! \./components/PunchCard.ls
 require! \./components/Search.ls
 require! \./components/Treemap.ls
 require! \./components/Trend.ls
+require \./index.styl
 
 # record :: Event -> ()
 record = 

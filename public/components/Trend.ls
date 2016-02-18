@@ -13,6 +13,8 @@ module.exports = create-class do
 
   # render :: a -> ReactElement
   render: ->
+    pretty = -> JSON.stringify it, null, 4
+
     StoryboardWrapper do
       cache: 1 * 60 * 60
       controls: 
@@ -37,13 +39,12 @@ module.exports = create-class do
       record: @props.record
       
       Layout do 
-        style:
-          display: \flex
-          flex-direction: \column
+        null 
 
         # MESSAGES
         Layout do 
-          display: \flex
+          style: 
+            display: \flex
 
           # TREND
           StoryWrapper do 
@@ -62,7 +63,8 @@ module.exports = create-class do
 
         # USERS
         Layout do 
-          display: \flex
+          style:
+            display: \flex
 
           # TREND
           StoryWrapper do 
@@ -88,9 +90,6 @@ module.exports = create-class do
 
         # POPULARITY TREND (in terms of count of messages)
         Layout do 
-          style:
-            display: \flex
-            flex-direction: \column
           extras:
             limit: 10
             show-legend: true

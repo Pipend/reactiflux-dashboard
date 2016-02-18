@@ -5,6 +5,8 @@ require! \moment
 require! \react-selectize
 SimpleSelect = create-factory react-selectize.SimpleSelect
 LabelledComponent = create-factory (require \pipe-storyboard).LabelledComponent
+require \react-selectize/themes/index.css
+require \./DateRange.styl
 
 module.exports = create-class do 
 
@@ -25,15 +27,14 @@ module.exports = create-class do
       # AGO      
       LabelledComponent do 
         label: \Ago
-        render: ~>
-          SimpleSelect do 
-            value: 
-              label: @props.ago
-              value: @props.ago
-            options: @props.ranges |> map ~> label: it, value: it
-            on-value-change: ({value}, callback) ~>
-              @props.on-change ago: value
-              callback!
+        SimpleSelect do 
+          value: 
+            label: @props.ago
+            value: @props.ago
+          options: @props.ranges |> map ~> label: it, value: it
+          on-value-change: ({value}, callback) ~>
+            @props.on-change ago: value
+            callback!
 
       if @props.ago == \custom
 
@@ -45,9 +46,8 @@ module.exports = create-class do
               key: p
               class-name: p
               label: p
-              render: ~> 
-                input do 
-                  type: \datetime-local
-                  value: @props[p]
-                  on-change: ({target:{value}}) ~>
-                    @props.on-change "#{p}" : value
+              input do 
+                type: \datetime-local
+                value: @props[p]
+                on-change: ({target:{value}}) ~>
+                  @props.on-change "#{p}" : value

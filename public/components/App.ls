@@ -1,10 +1,12 @@
 {map} = require \prelude-ls
-{clone-element, create-class, create-factory, DOM:{a, div}}:React = require \react
+{clone-element, create-class, create-factory, DOM:{a, div, iframe}}:React = require \react
 {find-DOM-node, render} = require \react-dom
+GithubButton = create-factory require \./GithubButton.ls
 require! \react-router
 Link = create-factory react-router.Link
+require \./App.styl
 
-module.exports = create-class do
+module.exports = create-class do 
 
     display-name: \App
 
@@ -68,32 +70,15 @@ module.exports = create-class do
                             ref: if highlight then \highlight else undefined
                             title
 
+                # GITHUB BUTTONS
                 div do 
                     class-name: \github-buttons
-
-                    # STAR
-                    a do 
-                        class-name: \github-button
-                        href: \https://github.com/Pipend/pipe
-                        \data-icon : \octicon-star
-                        \data-style : \mega
-                        \data-count-href : \/Pipend/pipe/stargazers
-                        \data-count-api : \/repos/Pipend/pipe#stargazers_count
-                        \data-count-aria-label : '# stargazers on GitHub'
-                        \aria-label : "Star Pipend/pipe on GitHub"
-                        \Star
-
-                    # FORK
-                    a do 
-                        class-name: \github-button
-                        href: \https://github.com/Pipend/pipe/fork
-                        \data-icon : \octicon-repo-forked
-                        \data-style : \mega
-                        \data-count-href : \/Pipend/pipe/network
-                        \data-count-api : \/repos/Pipend/pipe#forks_count
-                        \data-count-aria-label : '# forks on GitHub'
-                        \aria-label : "Fork Pipend/pipe on GitHub"
-                        \Fork
+                    <[star fork]> |> map ~>
+                        GithubButton do
+                            key: it
+                            author: \pipend
+                            repository: \pipe 
+                            type: it
 
             # ROUTES
             div class-name: \routes,

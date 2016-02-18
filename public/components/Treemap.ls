@@ -24,8 +24,5 @@ module.exports = create-class do
 
       # TREE MAP
       StoryWrapper do 
-        style:
-          border-right: '1px solid #ccc'
-          flex: 1
         show-title: false
         branch-id: \pBsY8gu

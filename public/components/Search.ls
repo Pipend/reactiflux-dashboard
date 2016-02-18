@@ -21,7 +21,7 @@ module.exports = create-class do
         * name: \searchString
           label: \search
           type: \text
-          placeholder: "Regex works too"
+          placeholder: "Regex works to"
           default-value: ""
 
         * username-selector!
@@ -40,7 +40,6 @@ module.exports = create-class do
         branch-id: \pBoHVpe
         show-title: false
         ref: \story
-
 
   get-initial-state: ->
     channels: []
