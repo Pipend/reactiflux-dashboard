@@ -1,8 +1,8 @@
 require! \path
 HtmlWebpackPlugin = require \html-webpack-plugin
 
-module.exports = 
-    entry: 
+module.exports =
+    entry:
         * \./public/index.ls
         ...
     output:
@@ -19,6 +19,8 @@ module.exports =
     plugins:
         * new HtmlWebpackPlugin do
             title: 'Reactiflux on Discord'
+            url: 'http://pipend.github.io/reactiflux-dashboard/'
+            image: 'https://avatars0.githubusercontent.com/u/12956758?v=3&amp;s=400'
             template: \public/index.html
         ...
 
