@@ -21,7 +21,7 @@ module.exports = create-class do
         * name: \searchString
           label: \search
           type: \text
-          placeholder: "Regex works to"
+          placeholder: "Regex works too"
           default-value: ""
 
         * username-selector!
